@@ -1,0 +1,11 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const hamburger = document.getElementById('hamburgerMenu');
+    const sideMenu = document.getElementById('sideMenu');
+
+    if(hamburger && sideMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+        });
+    }
+});
