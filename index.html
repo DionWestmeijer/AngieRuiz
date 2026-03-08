@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOPHIE MOORE - Product Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #e8e8e6;
+            --text-color: #111111;
+        }
+
+        /* --- BASIS STYLING --- */
+        html {
+            scroll-behavior: smooth; /* Zorgt voor het soepel scrollen naar secties */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 4rem;
+        }
+
+        /* --- HEADER & NAVIGATIE --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--text-color);
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001; /* Boven het uitschuifmenu */
+        }
+
+        .hamburger span {
+            display: block;
+            width: 35px;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span:last-child {
+            width: 25px;
+            align-self: flex-end;
+        }
+
+        /* Hamburger animatie als menu open is */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+            background-color: var(--bg-color);
+        }
+        .hamburger.active span:nth-child(2) {
+            transform: translateY(-8px) rotate(-45deg);
+            width: 35px;
+            background-color: var(--bg-color);
+        }
+
+        /* Uitschuifbaar Menu */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -100%; /* Verborgen buiten beeld */
+            width: 300px;
+            height: 100vh;
+            background-color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            transition: right 0.4s ease-in-out;
+            z-index: 999;
+        }
+
+        .side-menu.active {
+            right: 0; /* Schuift in beeld */
+        }
+
+        .side-menu a {
+            color: var(--bg-color);
+            text-decoration: none;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .side-menu a:hover {
+            color: #888;
+        }
+
+        /* --- HERO SECTIE --- */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 55%;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 4rem;
+            line-height: 1.2;
+            margin: 0 0 2rem 0;
+            text-transform: uppercase;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 80%;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #444;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: 700px;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(110%);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .scroll-circle {
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--text-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .scroll-down:hover .scroll-circle {
+            transform: translateY(5px);
+        }
+
+        .scroll-circle::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid var(--text-color);
+            border-bottom: 2px solid var(--text-color);
+            transform: rotate(45deg);
+            margin-bottom: 5px;
+        }
+
+        /* --- NIEUWE SECTIES (PORTFOLIO / CONTACT) --- */
+        section {
+            padding: 8rem 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .section-title {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.4s, transform 0.4s;
+        }
+
+        .portfolio-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            margin-top: 1rem;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: bold;
+        }
+
+        /* Contact Formulier */
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--text-color);
+        }
+
+        /* --- MOBIELE WEERGAVE --- */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 2rem; }
+            .hero { flex-direction: column; text-align: center; gap: 4rem; }
+            .hero-content { max-width: 100%; }
+            .description { max-width: 100%; margin: 0 auto 3rem auto; }
+            .hero-image { justify-content: center; }
+            .scroll-down { bottom: -60px; right: 50%; transform: translateX(50%); }
+            .portfolio-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- UITSCHUIFMENU -->
+    <nav class="side-menu" id="sideMenu">
+        <a href="#home" class="menu-link">Home</a>
+        <a href="#portfolio" class="menu-link">Werk</a>
+        <a href="#about" class="menu-link">Over Mij</a>
+        <a href="#contact" class="menu-link">Contact</a>
+    </nav>
+
+    <div class="container" id="home">
+        <!-- HEADER -->
+        <header>
+            <a href="#home" class="logo">CREATIVE X</a>
+            <div class="nav-right">
+                <!-- Hamburger menu icoon -->
+                <div class="hamburger" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- HOOFDSECTIE (HERO) -->
+        <main class="hero">
+            <div class="hero-content">
+                <div class="subtitle">SOPHIE MOORE</div>
+                <h1>A PRODUCT<br>DESIGNER FROM<br>NEW YORK</h1>
+                <p class="description">
+                    Gespecialiseerd in minimalistisch design en brutalisme. Ik transformeer complexe problemen in elegante, gebruiksvriendelijke oplossingen.
+                </p>
+                <a href="#contact" class="btn">CONTACT ME</a>
+            </div>
+
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Portret">
+                
+                <a href="#portfolio" class="scroll-down">
+                    <span>SCROLL DOWN</span>
+                    <div class="scroll-circle"></div>
+                </a>
+            </div>
+        </main>
+
+        <!-- PORTFOLIO SECTIE -->
+        <section id="portfolio">
+            <h2 class="section-title">Mijn Werk</h2>
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 1">
+                    <div class="portfolio-info">E-COMMERCE REDESIGN</div>
+                </div>
+                <!-- Project 2 -->
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 2">
+                    <div class="portfolio-info">BRANDING IDENTITY</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OVER MIJ SECTIE -->
+        <section id="about">
+            <h2 class="section-title">Over Mij</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.2rem; line-height: 1.8;">
+                <p>Met meer dan 5 jaar ervaring in de designwereld heb ik gewerkt met zowel startups als gevestigde merken. Mijn stijl is rauw, eerlijk en to the point. Geen onnodige versieringen, maar design dat werkt.</p>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTIE -->
+        <section id="contact">
+            <h2 class="section-title">Let's Talk</h2>
+            <div class="contact-wrapper">
+                <!-- Let op: dit formulier stuurt nog geen échte mail, daarvoor heb je een backend of een dienst als Formspree nodig -->
+                <form onsubmit="alert('Bedankt voor je bericht! (Dit is een testmelding)'); return false;">
+                    <input type="text" placeholder="Jouw Naam" required>
+                    <input type="email" placeholder="Jouw Email" required>
+                    <textarea placeholder="Vertel me over je project..." required></textarea>
+                    <button type="submit" class="btn" style="width: 100%; border: none;">VERSTUUR BERICHT</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2024 Jouw Naam. Ontworpen met HTML, CSS & JS.
+    </footer>
+
+    <!-- JAVASCRIPT VOOR INTERACTIVITEIT -->
+    <script>
+        // Hamburger Menu functionaliteit
+        const hamburger = document.getElementById('hamburgerMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        // Open/sluit menu bij klikken op hamburger
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+        });
+
+        // Sluit menu automatisch als je op een link klikt
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                sideMenu.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
